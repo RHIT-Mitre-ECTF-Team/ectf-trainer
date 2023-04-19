@@ -8,5 +8,5 @@ int send_ping(int argc, char** argv) {
     return 0;
 }
 
-// ADD_CMD(keyword, description, function name);
+// ADD_CMD(command, description, function name);
 ADD_CMD(ping, "Pings the other board", send_ping);

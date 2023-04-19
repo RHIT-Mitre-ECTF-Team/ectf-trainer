@@ -21,7 +21,7 @@ The esh project provides a (limited) printf() function that can be used, along w
 To add new functions to your firmware, add a C file in the fob or car directory and make sure to include "shell.h". See ping.c for an example. Register the command using the ADD_CMD directive:
 
 ```
-// ADD_CMD(command, description, function name);
+// ADD_CMD(command keyword, description, function name);
 ADD_CMD(ping, "Pings the other board", send_ping);
 ```
 
