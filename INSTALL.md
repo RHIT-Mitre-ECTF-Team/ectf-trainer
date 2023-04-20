@@ -21,7 +21,7 @@ Other hints:
 If you wish to reboot your Linux instance without shutting down Windows, you can with:
 ```wsl --shutdown```
 
-### Installation requirements.
+### Other OS installation requirements.
 
 To make this work, you will need the following:
 * GNU Arm Toolchain. Check with ```arm-none-eabi-gcc --version```
