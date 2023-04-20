@@ -4,14 +4,14 @@ The embedded Arm / Shell toolchain really works best under Linux. I recommend a 
 
 
 ### An easy way to install this for Windows is through the use of Windows Subsystem for Linux. 
-1. If you have a prebuilt WSL image, save it someplace, say Downloads.
+1. If you have a prebuilt WSL image, save it someplace, like Downloads or C:\wsl.
 2. If zipped, unzip it to get the ectf.tar file.
 3. Open a shell and navigate to your file. Run ```wsl --import ectf . ectf.tar```
 4. Once imported, run it with ```wsl -d ectf```
 
 ### To create a fresh WSL install:
 1. Install Windows Subsystem for Linux (wsl) from a command prompt or PowerShell instance with ```wsl --install``` 
-2. Not required but nice... install ```Windows Terminal```, again from the Microsoft Store.
+2. Not required but nice... install Windows Terminal from the Microsoft Store.
 3. Installing wsl should also install an instance of Ubuntu. To start it, find it on the Start Menu or through Windows Terminal (if you installed it).
 4. At the Linux command prompt, type ```code``` to install VS Code. After it installs, you can close it.
 5. Install packages, including the emulation software, QEMU, with ```sudo apt install -y make qemu-system-arm```   Check this step with ```qemu-system-arm -M help``` you should see a list of machines we can emulate.
