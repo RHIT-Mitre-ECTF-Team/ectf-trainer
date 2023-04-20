@@ -248,12 +248,3 @@ int printf(const char *fmt, ...) {
 }
 
 #endif  // SHELL_PRINTF_LITE
-
-
-int printf2(const char *fmt, ...) {
-  while (*fmt != '\0') {
-    __write_char2__(*fmt);
-    fmt++;
-  }
-  return 0;
-}
