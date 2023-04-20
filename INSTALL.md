@@ -5,6 +5,12 @@ The embedded Arm / Shell toolchain really works best under Linux. I recommend a 
 
 An easy way to install this for Windows is through the use of Windows Subsystem for Linux. 
 
+If you have a prebuilt WSL image, save it someplace, say Downloads.
+If zipped, unzip it to get the ectf.tar file.
+Open a shell and navigate to your file. Run ```wsl --import ectf . ectf.tar```
+Once imported, run it with ```wsl -d ectf```
+
+To create a fresh WSL install:
 1. Install Windows Subsystem for Linux (wsl) from a command prompt or PowerShell instance with ```wsl --install``` 
 2. Not required but nice... install ```Windows Terminal```, again from the Microsoft Store.
 3. Installing wsl should also install an instance of Ubuntu. To start it, find it on the Start Menu or through Windows Terminal (if you installed it).
