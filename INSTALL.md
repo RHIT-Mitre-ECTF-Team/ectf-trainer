@@ -32,7 +32,7 @@ If you wish to reboot your Linux instance without shutting down Windows, you can
 ## Option 3. So you want to try this on something other than WSL?
 
 To make this work, you will need the following:
-* GNU Arm Toolchain. Check with ```arm-none-eabi-gcc --version``` You may find the at ```https://lindevs.com/install-arm-gnu-toolchain-on-ubuntu``` helpful.
+* GNU Arm Toolchain. Check with ```arm-none-eabi-gcc --version``` You may find ```https://lindevs.com/install-arm-gnu-toolchain-on-ubuntu``` helpful.
 * QEMU for Arm. Check with ```qemu-system-arm -M help```
 * Clone the repository using ```git clone https://github.com/henthornlab/ectf-trainer.git``` 
 * Various other tools including nc and socat.
