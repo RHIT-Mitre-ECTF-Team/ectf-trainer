@@ -3,14 +3,14 @@
 The embedded Arm / Shell toolchain really works best under Linux. I recommend a Linux VM or using WSL (instructions below). If you wish to try another OS, see the end of this document.
 
 
-## An easy way to install this for Windows is through the use of Windows Subsystem for Linux.
-### Using the pre-built WSL image from Moodle
+## An easy way to install this for Windows is through the use of Windows Subsystem for Linux. You can use the pre-built image (Option 1) or build your own (Option 2).
+### Option 1. Using the pre-built WSL image from Moodle
 1. If you have a prebuilt WSL image, save it someplace, like Downloads or C:\wsl.
 2. If zipped, unzip it to get the ectf.tar file.
 3. Open a shell and navigate to your file. Run ```wsl --import ectf . ectf.tar```
 4. Once imported, run it with ```wsl -d ectf```
 
-### To create a fresh WSL install:
+### Option 2. To create a fresh WSL install:
 1. Install Windows Subsystem for Linux (wsl) from a command prompt or PowerShell instance with ```wsl --install``` 
 2. Not required but nice... install Windows Terminal from the Microsoft Store.
 3. Installing wsl should also install an instance of Ubuntu. To start it, find it on the Start Menu or through Windows Terminal (if you installed it).
@@ -29,7 +29,7 @@ Other hints:
 If you wish to reboot your Linux instance without shutting down Windows, you can with:
 ```wsl --shutdown```
 
-## So you want to try this on something other than WSL?
+## Option 3. So you want to try this on something other than WSL?
 
 To make this work, you will need the following:
 * GNU Arm Toolchain. Check with ```arm-none-eabi-gcc --version``` You may find the at ```https://lindevs.com/install-arm-gnu-toolchain-on-ubuntu``` helpful.
