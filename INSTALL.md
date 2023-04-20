@@ -1,4 +1,9 @@
-## Instructions for adding ectf-trainer to Windows.
+## Instructions for adding ectf-trainer.
+
+The embedded Arm / Shell toolchain really works best under Linux. I recommend a Linux VM or using WSL (instructions below). If you wish to try another OS, see the end of this document.
+
+
+An easy way to install this for Windows is through the use of Windows Subsystem for Linux. 
 
 1. Install Windows Subsystem for Linux (wsl) from a command prompt or PowerShell instance with ```wsl --install``` 
 2. Not required but nice... install ```Windows Terminal```, again from the Microsoft Store.
@@ -15,4 +20,11 @@
 Other hints:
 If you wish to reboot your Linux instance without shutting down Windows, you can with:
 ```wsl --shutdown```
+
+### Installation requirements.
+
+To make this work, you will need the following:
+* GNU Arm Toolchain. Check with ```arm-none-eabi-gcc --version```
+* QEMU for Arm. Check with ```qemu-system-arm -M help```
+* Various other tools including nc and socat.
 
