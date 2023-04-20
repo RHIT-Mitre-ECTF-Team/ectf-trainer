@@ -2,7 +2,7 @@
 
 This is a fork of the embedded shell project from Google, https://github.com/google/esh. That project has been extended to include multiple UARTs, virtual Tiva-C boards, and the ability to link multiple boards together over UART.
 
-To install, see INSTALL.md. [INSTALL.md https://github.com/henthornlab/ectf-trainer/blob/main/INSTALL.md]
+To install, see [INSTALL.md](https://github.com/henthornlab/ectf-trainer/blob/main/INSTALL.md)
 
 After installation, head to the ectf directory where you will find virtual examples of the car and the fob.
 
