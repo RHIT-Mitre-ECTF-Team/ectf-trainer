@@ -9,7 +9,7 @@ An easy way to install this for Windows is through the use of Windows Subsystem 
 2. Not required but nice... install ```Windows Terminal```, again from the Microsoft Store.
 3. Installing wsl should also install an instance of Ubuntu. To start it, find it on the Start Menu or through Windows Terminal (if you installed it).
 4. At the Linux command prompt, type ```code``` to install VS Code. After it installs, you can close it.
-5. Install the emulation software, QEMU, with ```sudo apt install -y qemu-system-arm```   After typing, ```qemu-system-arm -M help``` you should see a list of machines we can emulate.
+5. Install packages, including the emulation software, QEMU, with ```sudo apt install -y make qemu-system-arm```   Check this step with ```qemu-system-arm -M help``` you should see a list of machines we can emulate.
 6. Follow the directions at ```https://lindevs.com/install-arm-gnu-toolchain-on-ubuntu``` to install the GNU Arm Toolchain. Be sure to check that the install completed by using ```arm-none-eabi-gcc --version```
 7. Clone this repository using ```git clone https://github.com/henthornlab/ectf-trainer.git``` into your new Ubuntu.
 8. Change directory into ```cd ectf-trainer``` and then ```cd ectf/fob```
