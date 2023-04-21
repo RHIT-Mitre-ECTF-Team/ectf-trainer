@@ -28,6 +28,8 @@ extern "C" {
 #include "regs.h"
 #include "string.h"
 #include "aes.h"
+#include "base64.h"
+#include "ecdh.h"
 
 /**
  * @brief Looks for and executes a string as a command

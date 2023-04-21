@@ -2,417 +2,556 @@
 Memory Configuration
 
 Name             Origin             Length             Attributes
-ROM              0x0000000000000000 0x0000000000040000 xr
-RAM              0x0000000020000000 0x0000000000008000 xrw
-*default*        0x0000000000000000 0xffffffffffffffff
+ROM              0x00000000         0x00040000         xr
+RAM              0x20000000         0x00008000         xrw
+*default*        0x00000000         0xffffffff
 
 Linker script and memory map
 
-                0x00000000000016f8                _etext = LOADADDR (.data)
-                0x0000000020000000                _data = ADDR (.data)
-                0x0000000020000001                _edata = (ADDR (.data) + SIZEOF (.data))
-                0x0000000020000004                _bss = ADDR (.bss)
-                0x0000000020000080                _ebss = (ADDR (.bss) + SIZEOF (.bss))
+                0x00002260                        _etext = LOADADDR (.data)
+                0x20000000                        _data = ADDR (.data)
+                0x20000001                        _edata = (ADDR (.data) + SIZEOF (.data))
+                0x20000004                        _bss = ADDR (.bss)
+                0x20000140                        _ebss = (ADDR (.bss) + SIZEOF (.bss))
 
-.text           0x0000000000000000     0x16f8
+.text           0x00000000     0x2260
  *(.init*)
- .init_vector   0x0000000000000000      0x3c0 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
-                0x0000000000000000                vector_table
+ .init_vector   0x00000000      0x3c0 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+                0x00000000                vector_table
  *(.text*)
- .text          0x00000000000003c0       0x64 objects//home/drdave/efob/ectf/fob/mesg.o
-                0x00000000000003c0                car_mesg
- .text          0x0000000000000424       0x1c objects//home/drdave/efob/ectf/fob/ping.o
-                0x0000000000000424                ping
- .text          0x0000000000000440       0x1c objects//home/drdave/efob/ectf/fob/pair.o
-                0x0000000000000440                pair
- .text          0x000000000000045c       0x64 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
-                0x000000000000045c                uputc
-                0x0000000000000480                ugetc
-                0x000000000000049c                uart_init
- .text          0x00000000000004c0       0x64 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
-                0x00000000000004c0                u2putc
-                0x00000000000004e4                u2getc
-                0x0000000000000500                uart2_init
- .text          0x0000000000000524       0x8c objects//home/drdave/efob/ectf/fob/platform/platform.o
-                0x0000000000000524                pin_setup
-                0x0000000000000578                platform_init
- .text          0x00000000000005b0        0x2 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
-                0x00000000000005b0                default_handler
- *fill*         0x00000000000005b2        0x2 
- .text          0x00000000000005b4       0xac objects//home/drdave/efob/shell/lib/memlog/memlog.o
-                0x00000000000005b4                memlog_init
-                0x00000000000005f4                memlog_getc
-                0x0000000000000634                memlog_putc
- .text          0x0000000000000660      0x25c objects//home/drdave/efob/shell/lib/printf/printf.o
-                0x00000000000007bc                printf
-                0x0000000000000898                printf2
- .text          0x00000000000008bc      0x5e0 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
-                0x0000000000000d62                AES_init_ctx
-                0x0000000000000d6a                AES_init_ctx_iv
-                0x0000000000000d82                AES_ctx_set_iv
-                0x0000000000000d8e                AES_ECB_encrypt
-                0x0000000000000d9c                AES_ECB_decrypt
-                0x0000000000000daa                AES_CBC_encrypt_buffer
-                0x0000000000000de2                AES_CBC_decrypt_buffer
-                0x0000000000000e28                AES_CTR_xcrypt_buffer
- .text          0x0000000000000e9c       0x5a objects//home/drdave/efob/shell/lib/a2i/a2i.o
-                0x0000000000000e9c                atoi
-                0x0000000000000eb8                atoh
- *fill*         0x0000000000000ef6        0x2 
- .text          0x0000000000000ef8      0x160 objects//home/drdave/efob/shell/lib/utils/utils.o
-                0x0000000000000ef8                r32
-                0x0000000000000f28                w32
-                0x0000000000000f58                read_mem
-                0x0000000000000fa0                w32_bit
-                0x0000000000001008                r32_bit
- .text          0x0000000000001058       0x60 objects//home/drdave/efob/shell/lib/string/string.o
-                0x0000000000001058                strlen
-                0x0000000000001068                strcmp
-                0x000000000000107e                strcpy
-                0x0000000000001092                memcpy
-                0x00000000000010a8                memset
- .text          0x00000000000010b8      0x638 objects//home/drdave/efob/shell/shell/shell.o
-                0x00000000000010b8                initial_setup
-                0x00000000000011b8                cmd_exec_status
-                0x0000000000001238                help
-                0x0000000000001430                set_read_char
-                0x000000000000143c                set_read_char2
-                0x0000000000001448                set_write_char
-                0x0000000000001454                set_write_char2
-                0x0000000000001460                setup
-                0x0000000000001462                loop
-                0x0000000000001464                prepend_prompt
-                0x0000000000001508                active_prompt
-                0x0000000000001684                prompt
-                0x0000000000001698                exec
-                0x00000000000016c0                get_function_addr
- .text          0x00000000000016f0        0x8 objects//home/drdave/efob/ectf/fob/platform/start.o
-                0x00000000000016f0                reset_handler
+ .text          0x000003c0       0x64 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                0x000003c0                car_mesg
+ .text          0x00000424        0x2 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+                0x00000424                default_handler
+ *fill*         0x00000426        0x2 
+ .text          0x00000428       0x64 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+                0x00000428                uputc
+                0x0000044c                ugetc
+                0x00000468                uart_init
+ .text          0x0000048c       0x64 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+                0x0000048c                u2putc
+                0x000004b0                u2getc
+                0x000004cc                uart2_init
+ .text          0x000004f0       0x8c objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+                0x000004f0                pin_setup
+                0x00000544                platform_init
+ .text          0x0000057c       0x1c objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x0000057c                pair
+ .text          0x00000598       0x94 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                0x00000598                aes
+ .text          0x0000062c       0xd0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                0x0000062c                encode64
+                0x0000067c                decode64
+ .text          0x000006fc       0x1c objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x000006fc                send_ping
+ .text          0x00000718      0x65c objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x00000718                initial_setup
+                0x00000818                cmd_exec_status
+                0x000008a0                help
+                0x00000ab0                set_read_char
+                0x00000abc                set_read_char2
+                0x00000ac8                set_write_char
+                0x00000ad4                set_write_char2
+                0x00000ae0                setup
+                0x00000ae2                loop
+                0x00000ae4                prepend_prompt
+                0x00000b88                active_prompt
+                0x00000d04                prompt
+                0x00000d18                exec
+                0x00000d44                get_function_addr
+ .text          0x00000d74      0x25c objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+                0x00000d74                binary_to_base64
+                0x00000da6                base64_to_binary
+                0x00000de4                encode_base64_length
+                0x00000df8                decode_base64_length
+                0x00000e2c                encode_base64
+                0x00000f14                decode_base64
+ .text          0x00000fd0      0x238 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                0x0000112c                printf
+ .text          0x00001208      0x238 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                0x00001364                printf2
+ .text          0x00001440      0x160 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x00001440                r32
+                0x00001470                w32
+                0x000014a0                read_mem
+                0x000014e8                w32_bit
+                0x00001550                r32_bit
+ .text          0x000015a0      0x5d0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+                0x00001a36                AES_init_ctx
+                0x00001a3e                AES_init_ctx_iv
+                0x00001a56                AES_ctx_set_iv
+                0x00001a62                AES_ECB_encrypt
+                0x00001a70                AES_ECB_decrypt
+                0x00001a7e                AES_CBC_encrypt_buffer
+                0x00001ab6                AES_CBC_decrypt_buffer
+                0x00001afc                AES_CTR_xcrypt_buffer
+ .text          0x00001b70      0x580 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x00002054                ecdh_generate_keys
+                0x000020a8                ecdh_shared_secret
+ .text          0x000020f0       0x5c objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+                0x000020f0                atoi
+                0x0000210e                atoh
+ .text          0x0000214c       0xac objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+                0x0000214c                memlog_init
+                0x0000218c                memlog_getc
+                0x000021cc                memlog_putc
+ .text          0x000021f8       0x60 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+                0x000021f8                strlen
+                0x00002208                strcmp
+                0x0000221e                strcpy
+                0x00002232                memcpy
+                0x00002248                memset
+ .text          0x00002258        0x8 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+                0x00002258                reset_handler
 
-.glue_7         0x00000000000016f8        0x0
- .glue_7        0x00000000000016f8        0x0 linker stubs
+.glue_7         0x00002260        0x0
+ .glue_7        0x00002260        0x0 linker stubs
 
-.glue_7t        0x00000000000016f8        0x0
- .glue_7t       0x00000000000016f8        0x0 linker stubs
+.glue_7t        0x00002260        0x0
+ .glue_7t       0x00002260        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000016f8        0x0
- .vfp11_veneer  0x00000000000016f8        0x0 linker stubs
+.vfp11_veneer   0x00002260        0x0
+ .vfp11_veneer  0x00002260        0x0 linker stubs
 
-.v4_bx          0x00000000000016f8        0x0
- .v4_bx         0x00000000000016f8        0x0 linker stubs
+.v4_bx          0x00002260        0x0
+ .v4_bx         0x00002260        0x0 linker stubs
 
-.iplt           0x00000000000016f8        0x0
- .iplt          0x00000000000016f8        0x0 objects//home/drdave/efob/ectf/fob/mesg.o
+.iplt           0x00002260        0x0
+ .iplt          0x00002260        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 
-.rel.dyn        0x00000000000016f8        0x0
- .rel.iplt      0x00000000000016f8        0x0 objects//home/drdave/efob/ectf/fob/mesg.o
+.rel.dyn        0x00002260        0x0
+ .rel.iplt      0x00002260        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 
-.data           0x0000000020000000        0x1 load address 0x00000000000016f8
-                0x0000000020000000                . = ALIGN (0x8)
+.data           0x20000000        0x1 load address 0x00002260
+                0x20000000                        . = ALIGN (0x8)
  *(.data*)
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/mesg.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/ping.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/pair.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/platform/platform.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/shell/lib/printf/printf.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/shell/lib/utils/utils.o
- .data          0x0000000020000000        0x0 objects//home/drdave/efob/shell/lib/string/string.o
- .data          0x0000000020000000        0x1 objects//home/drdave/efob/shell/shell/shell.o
- .data          0x0000000020000001        0x0 objects//home/drdave/efob/ectf/fob/platform/start.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .data          0x20000000        0x1 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
 
-.igot.plt       0x0000000020000004        0x0 load address 0x00000000000016f9
- .igot.plt      0x0000000020000004        0x0 objects//home/drdave/efob/ectf/fob/mesg.o
+.igot.plt       0x20000004        0x0 load address 0x00002261
+ .igot.plt      0x20000004        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 
-.rodata         0x00000000000016fc      0x7bd
-                0x0000000000001700                . = ALIGN (0x8)
- *fill*         0x00000000000016fc        0x4 
-                0x0000000000001700                __CMD_TABLE_START__ = .
+.rodata         0x00002264      0xad8
+                0x00002268                        . = ALIGN (0x8)
+ *fill*         0x00002264        0x4 
+                0x00002268                        __CMD_TABLE_START__ = .
  *(.cmd_list*)
- .cmd_list      0x0000000000001700        0xc objects//home/drdave/efob/ectf/fob/mesg.o
-                0x0000000000001700                _varcar_mesg
- .cmd_list      0x000000000000170c        0xc objects//home/drdave/efob/ectf/fob/ping.o
-                0x000000000000170c                _varping
- .cmd_list      0x0000000000001718        0xc objects//home/drdave/efob/ectf/fob/pair.o
-                0x0000000000001718                _varpair
- .cmd_list      0x0000000000001724       0x3c objects//home/drdave/efob/shell/lib/utils/utils.o
-                0x0000000000001724                _varread_mem
-                0x0000000000001730                _varw32
-                0x000000000000173c                _varr32
-                0x0000000000001748                _varr32_bit
-                0x0000000000001754                _varw32_bit
- .cmd_list      0x0000000000001760       0x24 objects//home/drdave/efob/shell/shell/shell.o
-                0x0000000000001760                _varcmd_exec_status
-                0x000000000000176c                _varhelp
-                0x0000000000001778                _varshow_history
-                0x0000000000001784                __AUTO_TABLE_START__ = .
+ .cmd_list      0x00002268        0xc objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                0x00002268                _varcar_mesg
+ .cmd_list      0x00002274        0xc objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x00002274                _varpair
+ .cmd_list      0x00002280        0xc objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                0x00002280                _varaes
+ .cmd_list      0x0000228c       0x18 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                0x0000228c                _vardecode64
+                0x00002298                _varencode64
+ .cmd_list      0x000022a4        0xc objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x000022a4                _varsend_ping
+ .cmd_list      0x000022b0       0x24 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x000022b0                _varcmd_exec_status
+                0x000022bc                _varhelp
+                0x000022c8                _varshow_history
+ .cmd_list      0x000022d4       0x3c objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x000022d4                _varread_mem
+                0x000022e0                _varw32
+                0x000022ec                _varr32
+                0x000022f8                _varr32_bit
+                0x00002304                _varw32_bit
+                0x00002310                        __AUTO_TABLE_START__ = .
  *(.auto_list*)
- .auto_list     0x0000000000001784        0xc objects//home/drdave/efob/shell/shell/shell.o
-                0x0000000000001784                _varbuild_info
+ .auto_list     0x00002310        0xc objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x00002310                _varbuild_info
  *(.cmd_end*)
- .cmd_end       0x0000000000001790        0xc objects//home/drdave/efob/shell/shell/shell.o
+ .cmd_end       0x0000231c        0xc objects//home/ectf/ectf-trainer/shell/shell/shell.o
  *(.rodata*)
  .rodata.str1.4
-                0x000000000000179c       0x81 objects//home/drdave/efob/ectf/fob/mesg.o
-                                         0x85 (size before relaxing)
- *fill*         0x000000000000181d        0x3 
+                0x00002328       0x89 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                                 0x8d (size before relaxing)
+ *fill*         0x000023b1        0x3 
  .rodata.str1.4
-                0x0000000000001820       0x42 objects//home/drdave/efob/ectf/fob/ping.o
- *fill*         0x0000000000001862        0x2 
+                0x000023b4       0x5b objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ *fill*         0x0000240f        0x1 
  .rodata.str1.4
-                0x0000000000001864       0x5b objects//home/drdave/efob/ectf/fob/pair.o
- *fill*         0x00000000000018bf        0x1 
+                0x00002410       0xaf objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ *fill*         0x000024bf        0x1 
+ .rodata        0x000024c0       0x10 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
  .rodata.str1.4
-                0x00000000000018c0        0xf objects//home/drdave/efob/shell/lib/printf/printf.o
- *fill*         0x00000000000018cf        0x1 
- .rodata        0x00000000000018d0       0x10 objects//home/drdave/efob/shell/lib/printf/printf.o
- .rodata        0x00000000000018e0      0x20c objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
+                0x000024d0      0x18a objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ *fill*         0x0000265a        0x2 
  .rodata.str1.4
-                0x0000000000001aec      0x267 objects//home/drdave/efob/shell/lib/utils/utils.o
- *fill*         0x0000000000001d53        0x1 
- .rodata        0x0000000000001d54      0x165 objects//home/drdave/efob/shell/shell/shell.o
+                0x0000265c       0x42 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ *fill*         0x0000269e        0x2 
+ .rodata        0x000026a0      0x16d objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ *fill*         0x0000280d        0x3 
+ .rodata.str1.4
+                0x00002810        0xf objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ *fill*         0x0000281f        0x1 
+ .rodata        0x00002820       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .rodata.str1.4
+                0x00002830       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .rodata        0x00002840       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .rodata.str1.4
+                0x00002850      0x267 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ *fill*         0x00002ab7        0x1 
+ .rodata        0x00002ab8      0x20c objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .rodata        0x00002cc4       0x78 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x00002cc4                polynomial
+                0x00002cdc                coeff_b
+                0x00002cf4                base_y
+                0x00002d0c                base_x
+                0x00002d24                base_order
 
-.bss            0x0000000020000004       0x7c
-                0x0000000020000008                . = ALIGN (0x8)
- *fill*         0x0000000020000004        0x4 
+.bss            0x20000004      0x13c
+                0x20000008                        . = ALIGN (0x8)
+ *fill*         0x20000004        0x4 
  *(.bss*)
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/mesg.o
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/ping.o
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/pair.o
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/platform/platform.o
- .bss           0x0000000020000008        0x0 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .bss           0x0000000020000008       0x1c objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .bss           0x0000000020000024        0x0 objects//home/drdave/efob/shell/lib/printf/printf.o
- .bss           0x0000000020000024        0x0 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .bss           0x0000000020000024        0x0 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .bss           0x0000000020000024        0x0 objects//home/drdave/efob/shell/lib/utils/utils.o
- .bss           0x0000000020000024        0x0 objects//home/drdave/efob/shell/lib/string/string.o
- .bss           0x0000000020000024       0x5c objects//home/drdave/efob/shell/shell/shell.o
-                0x0000000020000024                __write_char__
-                0x0000000020000074                __read_char__
-                0x0000000020000078                __read_char2__
-                0x000000002000007c                __write_char2__
- .bss           0x0000000020000080        0x0 objects//home/drdave/efob/ectf/fob/platform/start.o
-                0x0000000020007ffc                PROVIDE (_STACK_TOP_ = ((ORIGIN (RAM) + LENGTH (RAM)) - 0x4))
-LOAD objects//home/drdave/efob/ectf/fob/mesg.o
-LOAD objects//home/drdave/efob/ectf/fob/ping.o
-LOAD objects//home/drdave/efob/ectf/fob/pair.o
-LOAD objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
-LOAD objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
-LOAD objects//home/drdave/efob/ectf/fob/platform/platform.o
-LOAD objects//home/drdave/efob/ectf/fob/platform/vector_table.o
-LOAD objects//home/drdave/efob/shell/lib/memlog/memlog.o
-LOAD objects//home/drdave/efob/shell/lib/printf/printf.o
-LOAD objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
-LOAD objects//home/drdave/efob/shell/lib/a2i/a2i.o
-LOAD objects//home/drdave/efob/shell/lib/utils/utils.o
-LOAD objects//home/drdave/efob/shell/lib/string/string.o
-LOAD objects//home/drdave/efob/shell/shell/shell.o
-LOAD objects//home/drdave/efob/ectf/fob/platform/start.o
-                0x0000000020000000                __RAM_BASE__ = 0x20000000
-                0x0000000000008000                __RAM_SIZE__ = 0x8000
-                0x0000000000000000                __ROM_BASE__ = 0x0
-                0x0000000000040000                __ROM_SIZE__ = 0x40000
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .bss           0x20000008      0x11c objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x20000008                __write_char__
+                0x20000118                __read_char__
+                0x2000011c                __read_char2__
+                0x20000120                __write_char2__
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .bss           0x20000124       0x1c objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .bss           0x20000140        0x0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .bss           0x20000140        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+                0x20007ffc                        PROVIDE (_STACK_TOP_ = ((ORIGIN (RAM) + LENGTH (RAM)) - 0x4))
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+LOAD objects//home/ectf/ectf-trainer/shell/shell/shell.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+                0x20000000                        __RAM_BASE__ = 0x20000000
+                0x00008000                        __RAM_SIZE__ = 0x8000
+                0x00000000                        __ROM_BASE__ = 0x0
+                0x00040000                        __ROM_SIZE__ = 0x40000
 OUTPUT(shell.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x0000000000000000     0x3279
- .debug_info    0x0000000000000000      0x1fb objects//home/drdave/efob/ectf/fob/mesg.o
- .debug_info    0x00000000000001fb      0x18b objects//home/drdave/efob/ectf/fob/ping.o
- .debug_info    0x0000000000000386      0x18b objects//home/drdave/efob/ectf/fob/pair.o
- .debug_info    0x0000000000000511       0x94 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .debug_info    0x00000000000005a5       0x94 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .debug_info    0x0000000000000639      0x12a objects//home/drdave/efob/ectf/fob/platform/platform.o
- .debug_info    0x0000000000000763       0xb8 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .debug_info    0x000000000000081b      0x219 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .debug_info    0x0000000000000a34      0x37d objects//home/drdave/efob/shell/lib/printf/printf.o
- .debug_info    0x0000000000000db1      0xc97 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .debug_info    0x0000000000001a48      0x150 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .debug_info    0x0000000000001b98      0x584 objects//home/drdave/efob/shell/lib/utils/utils.o
- .debug_info    0x000000000000211c      0x22a objects//home/drdave/efob/shell/lib/string/string.o
- .debug_info    0x0000000000002346      0xf33 objects//home/drdave/efob/shell/shell/shell.o
+.debug_info     0x00000000     0x5190
+ .debug_info    0x00000000      0x205 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_info    0x00000205       0xc1 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_info    0x000002c6       0x95 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_info    0x0000035b       0x95 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_info    0x000003f0      0x183 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_info    0x00000573      0x18f objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_info    0x00000702      0x399 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .debug_info    0x00000a9b      0x3b5 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_info    0x00000e50      0x18f objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_info    0x00000fdf      0xee3 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_info    0x00001ec2      0x309 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_info    0x000021cb      0x32f objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_info    0x000024fa      0x32f objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_info    0x00002829      0x56c objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_info    0x00002d95      0xc33 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_info    0x000039c8     0x1245 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_info    0x00004c0d      0x14b objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_info    0x00004d58      0x22a objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_info    0x00004f82      0x20e objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_abbrev   0x0000000000000000     0x1183
- .debug_abbrev  0x0000000000000000      0x11a objects//home/drdave/efob/ectf/fob/mesg.o
- .debug_abbrev  0x000000000000011a      0x106 objects//home/drdave/efob/ectf/fob/ping.o
- .debug_abbrev  0x0000000000000220      0x106 objects//home/drdave/efob/ectf/fob/pair.o
- .debug_abbrev  0x0000000000000326       0xa7 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .debug_abbrev  0x00000000000003cd       0xa7 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .debug_abbrev  0x0000000000000474       0x7c objects//home/drdave/efob/ectf/fob/platform/platform.o
- .debug_abbrev  0x00000000000004f0       0x8b objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .debug_abbrev  0x000000000000057b      0x140 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .debug_abbrev  0x00000000000006bb      0x1d7 objects//home/drdave/efob/shell/lib/printf/printf.o
- .debug_abbrev  0x0000000000000892      0x237 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .debug_abbrev  0x0000000000000ac9       0xc6 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .debug_abbrev  0x0000000000000b8f      0x16f objects//home/drdave/efob/shell/lib/utils/utils.o
- .debug_abbrev  0x0000000000000cfe      0x101 objects//home/drdave/efob/shell/lib/string/string.o
- .debug_abbrev  0x0000000000000dff      0x384 objects//home/drdave/efob/shell/shell/shell.o
+.debug_abbrev   0x00000000     0x1a62
+ .debug_abbrev  0x00000000      0x11e objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_abbrev  0x0000011e       0x9d objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_abbrev  0x000001bb       0x9f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_abbrev  0x0000025a       0x9f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_abbrev  0x000002f9       0xca objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_abbrev  0x000003c3      0x10b objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_abbrev  0x000004ce      0x194 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .debug_abbrev  0x00000662      0x163 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_abbrev  0x000007c5      0x10b objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_abbrev  0x000008d0      0x3e2 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_abbrev  0x00000cb2       0xdf objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_abbrev  0x00000d91      0x1cf objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_abbrev  0x00000f60      0x1cf objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_abbrev  0x0000112f      0x192 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_abbrev  0x000012c1      0x261 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_abbrev  0x00001522      0x220 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_abbrev  0x00001742       0xc6 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_abbrev  0x00001808      0x152 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_abbrev  0x0000195a      0x108 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_loc      0x0000000000000000     0x239a
- .debug_loc     0x0000000000000000       0x67 objects//home/drdave/efob/ectf/fob/mesg.o
- .debug_loc     0x0000000000000067       0x4a objects//home/drdave/efob/ectf/fob/ping.o
- .debug_loc     0x00000000000000b1       0x4a objects//home/drdave/efob/ectf/fob/pair.o
- .debug_loc     0x00000000000000fb       0x42 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .debug_loc     0x000000000000013d       0x42 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .debug_loc     0x000000000000017f       0xd6 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .debug_loc     0x0000000000000255      0x5b1 objects//home/drdave/efob/shell/lib/printf/printf.o
- .debug_loc     0x0000000000000806      0xa13 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .debug_loc     0x0000000000001219      0x138 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .debug_loc     0x0000000000001351      0x4bc objects//home/drdave/efob/shell/lib/utils/utils.o
- .debug_loc     0x000000000000180d      0x1cb objects//home/drdave/efob/shell/lib/string/string.o
- .debug_loc     0x00000000000019d8      0x9c2 objects//home/drdave/efob/shell/shell/shell.o
+.debug_loclists
+                0x00000000     0x1fdb
+ .debug_loclists
+                0x00000000       0x3a objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_loclists
+                0x0000003a       0x2f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_loclists
+                0x00000069       0x2f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_loclists
+                0x00000098       0x30 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_loclists
+                0x000000c8       0x44 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .debug_loclists
+                0x0000010c      0x10c objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_loclists
+                0x00000218       0x30 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_loclists
+                0x00000248      0x53c objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_loclists
+                0x00000784      0x19d objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_loclists
+                0x00000921      0x390 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_loclists
+                0x00000cb1      0x390 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_loclists
+                0x00001041      0x282 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_loclists
+                0x000012c3      0x618 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_loclists
+                0x000018db      0x507 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_loclists
+                0x00001de2       0xa1 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_loclists
+                0x00001e83       0x78 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_loclists
+                0x00001efb       0xe0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_aranges  0x0000000000000000      0x1c0
+.debug_aranges  0x00000000      0x260
  .debug_aranges
-                0x0000000000000000       0x20 objects//home/drdave/efob/ectf/fob/mesg.o
+                0x00000000       0x20 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
  .debug_aranges
-                0x0000000000000020       0x20 objects//home/drdave/efob/ectf/fob/ping.o
+                0x00000020       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
  .debug_aranges
-                0x0000000000000040       0x20 objects//home/drdave/efob/ectf/fob/pair.o
+                0x00000040       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
  .debug_aranges
-                0x0000000000000060       0x20 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
+                0x00000060       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
  .debug_aranges
-                0x0000000000000080       0x20 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
+                0x00000080       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
  .debug_aranges
-                0x00000000000000a0       0x20 objects//home/drdave/efob/ectf/fob/platform/platform.o
+                0x000000a0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
  .debug_aranges
-                0x00000000000000c0       0x20 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
+                0x000000c0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
  .debug_aranges
-                0x00000000000000e0       0x20 objects//home/drdave/efob/shell/lib/memlog/memlog.o
+                0x000000e0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
  .debug_aranges
-                0x0000000000000100       0x20 objects//home/drdave/efob/shell/lib/printf/printf.o
+                0x00000100       0x20 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
  .debug_aranges
-                0x0000000000000120       0x20 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
+                0x00000120       0x20 objects//home/ectf/ectf-trainer/shell/shell/shell.o
  .debug_aranges
-                0x0000000000000140       0x20 objects//home/drdave/efob/shell/lib/a2i/a2i.o
+                0x00000140       0x20 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
  .debug_aranges
-                0x0000000000000160       0x20 objects//home/drdave/efob/shell/lib/utils/utils.o
+                0x00000160       0x20 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
  .debug_aranges
-                0x0000000000000180       0x20 objects//home/drdave/efob/shell/lib/string/string.o
+                0x00000180       0x20 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
  .debug_aranges
-                0x00000000000001a0       0x20 objects//home/drdave/efob/shell/shell/shell.o
+                0x000001a0       0x20 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_aranges
+                0x000001c0       0x20 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_aranges
+                0x000001e0       0x20 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_aranges
+                0x00000200       0x20 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_aranges
+                0x00000220       0x20 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_aranges
+                0x00000240       0x20 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_line     0x0000000000000000     0x2741
- .debug_line    0x0000000000000000      0x134 objects//home/drdave/efob/ectf/fob/mesg.o
- .debug_line    0x0000000000000134       0xb8 objects//home/drdave/efob/ectf/fob/ping.o
- .debug_line    0x00000000000001ec       0xb8 objects//home/drdave/efob/ectf/fob/pair.o
- .debug_line    0x00000000000002a4       0xfe objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .debug_line    0x00000000000003a2       0xff objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .debug_line    0x00000000000004a1      0x11a objects//home/drdave/efob/ectf/fob/platform/platform.o
- .debug_line    0x00000000000005bb       0xaf objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .debug_line    0x000000000000066a      0x1e1 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .debug_line    0x000000000000084b      0x3b6 objects//home/drdave/efob/shell/lib/printf/printf.o
- .debug_line    0x0000000000000c01      0xb23 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .debug_line    0x0000000000001724      0x174 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .debug_line    0x0000000000001898      0x306 objects//home/drdave/efob/shell/lib/utils/utils.o
- .debug_line    0x0000000000001b9e      0x1c1 objects//home/drdave/efob/shell/lib/string/string.o
- .debug_line    0x0000000000001d5f      0x9e2 objects//home/drdave/efob/shell/shell/shell.o
+.debug_line     0x00000000     0x3970
+ .debug_line    0x00000000      0x13c objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_line    0x0000013c       0xc4 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_line    0x00000200       0xfd objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_line    0x000002fd       0xfe objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_line    0x000003fb      0x12c objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_line    0x00000527       0xca objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_line    0x000005f1      0x1a7 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .debug_line    0x00000798      0x20c objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_line    0x000009a4       0xca objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_line    0x00000a6e      0x96a objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_line    0x000013d8      0x466 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_line    0x0000183e      0x3a3 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_line    0x00001be1      0x3a4 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_line    0x00001f85      0x323 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_line    0x000022a8      0xadb objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_line    0x00002d83      0x6a2 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_line    0x00003425      0x189 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_line    0x000035ae      0x20f objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_line    0x000037bd      0x1b3 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_str      0x0000000000000000      0x9d4
- .debug_str     0x0000000000000000      0x16b objects//home/drdave/efob/ectf/fob/mesg.o
-                                        0x1ad (size before relaxing)
- .debug_str     0x000000000000016b       0x33 objects//home/drdave/efob/ectf/fob/ping.o
-                                        0x1a6 (size before relaxing)
- .debug_str     0x000000000000019e       0x2b objects//home/drdave/efob/ectf/fob/pair.o
-                                        0x1a6 (size before relaxing)
- .debug_str     0x00000000000001c9       0x46 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
-                                         0xeb (size before relaxing)
- .debug_str     0x000000000000020f       0x4a objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
-                                         0xef (size before relaxing)
- .debug_str     0x0000000000000259       0x83 objects//home/drdave/efob/ectf/fob/platform/platform.o
-                                        0x1cd (size before relaxing)
- .debug_str     0x00000000000002dc       0x65 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
-                                        0x189 (size before relaxing)
- .debug_str     0x0000000000000341       0xb8 objects//home/drdave/efob/shell/lib/memlog/memlog.o
-                                        0x205 (size before relaxing)
- .debug_str     0x00000000000003f9       0xec objects//home/drdave/efob/shell/lib/printf/printf.o
-                                        0x1c9 (size before relaxing)
- .debug_str     0x00000000000004e5      0x168 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
-                                        0x2e0 (size before relaxing)
- .debug_str     0x000000000000064d       0x30 objects//home/drdave/efob/shell/lib/a2i/a2i.o
-                                        0x168 (size before relaxing)
- .debug_str     0x000000000000067d       0x7f objects//home/drdave/efob/shell/lib/utils/utils.o
-                                        0x22a (size before relaxing)
- .debug_str     0x00000000000006fc       0x5c objects//home/drdave/efob/shell/lib/string/string.o
-                                        0x149 (size before relaxing)
- .debug_str     0x0000000000000758      0x27c objects//home/drdave/efob/shell/shell/shell.o
-                                        0x4d1 (size before relaxing)
+.debug_str      0x00000000      0xe06
+ .debug_str     0x00000000      0x16d objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                                0x1af (size before relaxing)
+ .debug_str     0x0000016d       0x79 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+                                0x199 (size before relaxing)
+ .debug_str     0x000001e6       0x4c objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+                                 0xed (size before relaxing)
+ .debug_str     0x00000232       0x50 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+                                 0xf1 (size before relaxing)
+ .debug_str     0x00000282       0x89 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+                                0x1e9 (size before relaxing)
+ .debug_str     0x0000030b       0x39 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                                0x1a8 (size before relaxing)
+ .debug_str     0x00000344       0x82 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                                0x202 (size before relaxing)
+ .debug_str     0x000003c6       0x72 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                                0x1fc (size before relaxing)
+ .debug_str     0x00000438       0x36 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                                0x1b2 (size before relaxing)
+ .debug_str     0x0000046e      0x2b5 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                                0x4da (size before relaxing)
+ .debug_str     0x00000723       0xb6 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+                                0x189 (size before relaxing)
+ .debug_str     0x000007d9       0xcd objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                                0x1b3 (size before relaxing)
+ .debug_str     0x000008a6       0x63 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                                0x1ba (size before relaxing)
+ .debug_str     0x00000909       0x8f objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                                0x22c (size before relaxing)
+ .debug_str     0x00000998      0x124 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+                                0x2e2 (size before relaxing)
+ .debug_str     0x00000abc      0x219 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                                0x351 (size before relaxing)
+ .debug_str     0x00000cd5       0x2c objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+                                0x16a (size before relaxing)
+ .debug_str     0x00000d01       0xaf objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+                                0x20e (size before relaxing)
+ .debug_str     0x00000db0       0x56 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+                                0x14b (size before relaxing)
 
-.comment        0x0000000000000000       0x33
- .comment       0x0000000000000000       0x33 objects//home/drdave/efob/ectf/fob/mesg.o
-                                         0x34 (size before relaxing)
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/ectf/fob/ping.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/ectf/fob/pair.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/ectf/fob/platform/platform.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/lib/printf/printf.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/lib/utils/utils.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/lib/string/string.o
- .comment       0x0000000000000033       0x34 objects//home/drdave/efob/shell/shell/shell.o
+.comment        0x00000000       0x55
+ .comment       0x00000000       0x55 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                                 0x56 (size before relaxing)
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
 .ARM.attributes
-                0x0000000000000000       0x2c
+                0x00000000       0x2c
  .ARM.attributes
-                0x0000000000000000       0x2e objects//home/drdave/efob/ectf/fob/mesg.o
+                0x00000000       0x2e objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
  .ARM.attributes
-                0x000000000000002e       0x2e objects//home/drdave/efob/ectf/fob/ping.o
+                0x0000002e       0x2e objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
  .ARM.attributes
-                0x000000000000005c       0x2e objects//home/drdave/efob/ectf/fob/pair.o
+                0x0000005c       0x2e objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
  .ARM.attributes
-                0x000000000000008a       0x2e objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
+                0x0000008a       0x2e objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
  .ARM.attributes
-                0x00000000000000b8       0x2e objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
+                0x000000b8       0x2e objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
  .ARM.attributes
-                0x00000000000000e6       0x2e objects//home/drdave/efob/ectf/fob/platform/platform.o
+                0x000000e6       0x2e objects//home/ectf/ectf-trainer/ectf/fob/pair.o
  .ARM.attributes
-                0x0000000000000114       0x2e objects//home/drdave/efob/ectf/fob/platform/vector_table.o
+                0x00000114       0x2e objects//home/ectf/ectf-trainer/ectf/fob/aes.o
  .ARM.attributes
-                0x0000000000000142       0x2e objects//home/drdave/efob/shell/lib/memlog/memlog.o
+                0x00000142       0x2e objects//home/ectf/ectf-trainer/ectf/fob/base64.o
  .ARM.attributes
-                0x0000000000000170       0x2e objects//home/drdave/efob/shell/lib/printf/printf.o
+                0x00000170       0x2e objects//home/ectf/ectf-trainer/ectf/fob/ping.o
  .ARM.attributes
-                0x000000000000019e       0x2e objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
+                0x0000019e       0x2e objects//home/ectf/ectf-trainer/shell/shell/shell.o
  .ARM.attributes
-                0x00000000000001cc       0x2e objects//home/drdave/efob/shell/lib/a2i/a2i.o
+                0x000001cc       0x2e objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
  .ARM.attributes
-                0x00000000000001fa       0x2e objects//home/drdave/efob/shell/lib/utils/utils.o
+                0x000001fa       0x2e objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
  .ARM.attributes
-                0x0000000000000228       0x2e objects//home/drdave/efob/shell/lib/string/string.o
+                0x00000228       0x2e objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
  .ARM.attributes
-                0x0000000000000256       0x2e objects//home/drdave/efob/shell/shell/shell.o
+                0x00000256       0x2e objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
  .ARM.attributes
-                0x0000000000000284       0x1c objects//home/drdave/efob/ectf/fob/platform/start.o
+                0x00000284       0x2e objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .ARM.attributes
+                0x000002b2       0x2e objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .ARM.attributes
+                0x000002e0       0x2e objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .ARM.attributes
+                0x0000030e       0x2e objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .ARM.attributes
+                0x0000033c       0x2e objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .ARM.attributes
+                0x0000036a       0x1c objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
 
-.debug_frame    0x0000000000000000      0x898
- .debug_frame   0x0000000000000000       0x2c objects//home/drdave/efob/ectf/fob/mesg.o
- .debug_frame   0x000000000000002c       0x28 objects//home/drdave/efob/ectf/fob/ping.o
- .debug_frame   0x0000000000000054       0x28 objects//home/drdave/efob/ectf/fob/pair.o
- .debug_frame   0x000000000000007c       0x48 objects//home/drdave/efob/ectf/fob/platform/uart/uart.o
- .debug_frame   0x00000000000000c4       0x48 objects//home/drdave/efob/ectf/fob/platform/uart/uart2.o
- .debug_frame   0x000000000000010c       0x38 objects//home/drdave/efob/ectf/fob/platform/platform.o
- .debug_frame   0x0000000000000144       0x20 objects//home/drdave/efob/ectf/fob/platform/vector_table.o
- .debug_frame   0x0000000000000164       0x54 objects//home/drdave/efob/shell/lib/memlog/memlog.o
- .debug_frame   0x00000000000001b8       0xb8 objects//home/drdave/efob/shell/lib/printf/printf.o
- .debug_frame   0x0000000000000270      0x238 objects//home/drdave/efob/shell/lib/tiny-aes/aes.o
- .debug_frame   0x00000000000004a8       0x30 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .debug_frame   0x00000000000004d8       0x98 objects//home/drdave/efob/shell/lib/utils/utils.o
- .debug_frame   0x0000000000000570       0x60 objects//home/drdave/efob/shell/lib/string/string.o
- .debug_frame   0x00000000000005d0      0x2c8 objects//home/drdave/efob/shell/shell/shell.o
+.debug_frame    0x00000000      0xc7c
+ .debug_frame   0x00000000       0x2c objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_frame   0x0000002c       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_frame   0x0000004c       0x48 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_frame   0x00000094       0x48 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_frame   0x000000dc       0x38 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_frame   0x00000114       0x28 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_frame   0x0000013c       0x30 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+ .debug_frame   0x0000016c       0x50 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_frame   0x000001bc       0x28 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_frame   0x000001e4      0x2c8 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_frame   0x000004ac       0x9c objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_frame   0x00000548       0x88 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_frame   0x000005d0       0x88 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_frame   0x00000658       0x98 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_frame   0x000006f0      0x238 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_frame   0x00000928      0x270 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_frame   0x00000b98       0x30 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_frame   0x00000bc8       0x54 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_frame   0x00000c1c       0x60 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_ranges   0x0000000000000000       0xd8
- .debug_ranges  0x0000000000000000       0x78 objects//home/drdave/efob/shell/lib/printf/printf.o
- .debug_ranges  0x0000000000000078       0x30 objects//home/drdave/efob/shell/lib/a2i/a2i.o
- .debug_ranges  0x00000000000000a8       0x18 objects//home/drdave/efob/shell/lib/utils/utils.o
- .debug_ranges  0x00000000000000c0       0x18 objects//home/drdave/efob/shell/shell/shell.o
+.debug_rnglists
+                0x00000000       0xec
+ .debug_rnglists
+                0x00000000       0x17 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_rnglists
+                0x00000017       0x42 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_rnglists
+                0x00000059       0x42 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_rnglists
+                0x0000009b       0x15 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_rnglists
+                0x000000b0       0x22 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_rnglists
+                0x000000d2       0x1a objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o

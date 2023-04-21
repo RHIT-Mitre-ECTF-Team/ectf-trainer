@@ -58,7 +58,7 @@ extern "C" {
  * Defaults to 32.
  */
 #ifndef LINE_BUFF_SIZE
-#define LINE_BUFF_SIZE 32
+#define LINE_BUFF_SIZE 128
 #endif
 
 /**

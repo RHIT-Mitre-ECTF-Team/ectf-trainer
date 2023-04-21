@@ -16,7 +16,7 @@ int car_mesg(int argc, char** argv) {
             printf("Got a ping reply.\n");
         }
         else {
-            printf("strcmp didn't match %s\n", argv[1]);
+            printf("Didn't know how to handle %s\n", argv[1]);
         }
 
     }
