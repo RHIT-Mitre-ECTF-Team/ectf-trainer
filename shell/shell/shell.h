@@ -30,6 +30,8 @@ extern "C" {
 #include "aes.h"
 #include "base64.h"
 #include "ecdh.h"
+#include "sha256.h"
+
 
 /**
  * @brief Looks for and executes a string as a command

@@ -1,8 +1,8 @@
 # ectf Trainer
 
-This is a fork of the embedded shell project from Google, https://github.com/google/esh. That project has been extended to include multiple UARTs, virtual Tiva-C boards, and the ability to link multiple boards together over UART.
+This is a fork of the embedded shell project from Google, https://github.com/google/esh. That project has been extended to include multiple UARTs, virtual Tiva-C boards, and the ability to link multiple boards together over UART (and eavesdrop on them!).
 
-To install, see INSTALL.md.
+To install, see [INSTALL.md](https://github.com/henthornlab/ectf-trainer/blob/main/INSTALL.md)
 
 After installation, head to the ectf directory where you will find virtual examples of the car and the fob.
 
@@ -27,6 +27,5 @@ ADD_CMD(ping, "Pings the other board", send_ping);
 
 will cause the send_ping() function to run when the user types the word ping on the console.
 
-To send characters to UART1, use printf(). 
-To send characters to UART2, use printf2().
-
+To send characters to the first UART, use printf(). 
+To send characters to the second UART, use printf2().

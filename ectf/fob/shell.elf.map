@@ -8,121 +8,130 @@ RAM              0x20000000         0x00008000         xrw
 
 Linker script and memory map
 
-                0x00002260                        _etext = LOADADDR (.data)
+                0x000027ec                        _etext = LOADADDR (.data)
                 0x20000000                        _data = ADDR (.data)
-                0x20000001                        _edata = (ADDR (.data) + SIZEOF (.data))
-                0x20000004                        _bss = ADDR (.bss)
-                0x20000140                        _ebss = (ADDR (.bss) + SIZEOF (.bss))
+                0x20000050                        _edata = (ADDR (.data) + SIZEOF (.data))
+                0x20000050                        _bss = ADDR (.bss)
+                0x20000340                        _ebss = (ADDR (.bss) + SIZEOF (.bss))
 
-.text           0x00000000     0x2260
+.text           0x00000000     0x27ec
  *(.init*)
  .init_vector   0x00000000      0x3c0 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
                 0x00000000                vector_table
  *(.text*)
- .text          0x000003c0       0x64 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .text          0x000003c0      0x114 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
                 0x000003c0                car_mesg
- .text          0x00000424        0x2 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
-                0x00000424                default_handler
- *fill*         0x00000426        0x2 
- .text          0x00000428       0x64 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
-                0x00000428                uputc
-                0x0000044c                ugetc
-                0x00000468                uart_init
- .text          0x0000048c       0x64 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
-                0x0000048c                u2putc
-                0x000004b0                u2getc
-                0x000004cc                uart2_init
- .text          0x000004f0       0x8c objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
-                0x000004f0                pin_setup
-                0x00000544                platform_init
- .text          0x0000057c       0x1c objects//home/ectf/ectf-trainer/ectf/fob/pair.o
-                0x0000057c                pair
- .text          0x00000598       0x94 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
-                0x00000598                aes
- .text          0x0000062c       0xd0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
-                0x0000062c                encode64
-                0x0000067c                decode64
- .text          0x000006fc       0x1c objects//home/ectf/ectf-trainer/ectf/fob/ping.o
-                0x000006fc                send_ping
- .text          0x00000718      0x65c objects//home/ectf/ectf-trainer/shell/shell/shell.o
-                0x00000718                initial_setup
-                0x00000818                cmd_exec_status
-                0x000008a0                help
-                0x00000ab0                set_read_char
-                0x00000abc                set_read_char2
-                0x00000ac8                set_write_char
-                0x00000ad4                set_write_char2
-                0x00000ae0                setup
-                0x00000ae2                loop
-                0x00000ae4                prepend_prompt
-                0x00000b88                active_prompt
-                0x00000d04                prompt
-                0x00000d18                exec
-                0x00000d44                get_function_addr
- .text          0x00000d74      0x25c objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
-                0x00000d74                binary_to_base64
-                0x00000da6                base64_to_binary
-                0x00000de4                encode_base64_length
-                0x00000df8                decode_base64_length
-                0x00000e2c                encode_base64
-                0x00000f14                decode_base64
- .text          0x00000fd0      0x238 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
-                0x0000112c                printf
- .text          0x00001208      0x238 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
-                0x00001364                printf2
- .text          0x00001440      0x160 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
-                0x00001440                r32
-                0x00001470                w32
-                0x000014a0                read_mem
-                0x000014e8                w32_bit
-                0x00001550                r32_bit
- .text          0x000015a0      0x5d0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
-                0x00001a36                AES_init_ctx
-                0x00001a3e                AES_init_ctx_iv
-                0x00001a56                AES_ctx_set_iv
-                0x00001a62                AES_ECB_encrypt
-                0x00001a70                AES_ECB_decrypt
-                0x00001a7e                AES_CBC_encrypt_buffer
-                0x00001ab6                AES_CBC_decrypt_buffer
-                0x00001afc                AES_CTR_xcrypt_buffer
- .text          0x00001b70      0x580 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
-                0x00002054                ecdh_generate_keys
-                0x000020a8                ecdh_shared_secret
- .text          0x000020f0       0x5c objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
-                0x000020f0                atoi
-                0x0000210e                atoh
- .text          0x0000214c       0xac objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
-                0x0000214c                memlog_init
-                0x0000218c                memlog_getc
-                0x000021cc                memlog_putc
- .text          0x000021f8       0x60 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
-                0x000021f8                strlen
-                0x00002208                strcmp
-                0x0000221e                strcpy
-                0x00002232                memcpy
-                0x00002248                memset
- .text          0x00002258        0x8 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
-                0x00002258                reset_handler
+ .text          0x000004d4        0x2 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+                0x000004d4                default_handler
+ *fill*         0x000004d6        0x2 
+ .text          0x000004d8       0x64 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+                0x000004d8                uputc
+                0x000004fc                ugetc
+                0x00000518                uart_init
+ .text          0x0000053c       0x64 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+                0x0000053c                u2putc
+                0x00000560                u2getc
+                0x0000057c                uart2_init
+ .text          0x000005a0       0x8c objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+                0x000005a0                pin_setup
+                0x000005f4                platform_init
+ .text          0x0000062c       0xa4 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+                0x0000062c                aes_test
+ .text          0x000006d0       0x1c objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x000006d0                pair
+ .text          0x000006ec       0xac objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                0x000006ec                encode64
+                0x0000073c                decode64
+ .text          0x00000798      0x10c objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+                0x00000798                ecdh_test
+ .text          0x000008a4       0x1c objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x000008a4                send_ping
+ .text          0x000008c0       0xa4 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+                0x000008c0                sha256_test
+ .text          0x00000964      0x680 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x00000964                initial_setup
+                0x00000a64                cmd_exec_status
+                0x00000aec                help
+                0x00000cfc                set_read_char
+                0x00000d08                set_read_char2
+                0x00000d14                set_write_char
+                0x00000d20                set_write_char2
+                0x00000d2c                setup
+                0x00000d2e                loop
+                0x00000d30                prepend_prompt
+                0x00000dd4                active_prompt
+                0x00000f50                prompt
+                0x00000f88                exec
+                0x00000fb4                get_function_addr
+ .text          0x00000fe4      0x25c objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+                0x00000fe4                binary_to_base64
+                0x00001016                base64_to_binary
+                0x00001054                encode_base64_length
+                0x00001068                decode_base64_length
+                0x0000109c                encode_base64
+                0x00001184                decode_base64
+ .text          0x00001240      0x2f0 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+                0x00001240                sha256_transform
+                0x000013b4                sha256_init
+                0x00001408                sha256_update
+                0x00001448                sha256_final
+ .text          0x00001530      0x238 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                0x0000168c                printf
+ .text          0x00001768      0x238 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                0x000018c4                printf2
+ .text          0x000019a0      0x160 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x000019a0                r32
+                0x000019d0                w32
+                0x00001a00                read_mem
+                0x00001a48                w32_bit
+                0x00001ab0                r32_bit
+ .text          0x00001b00      0x5fc objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+                0x00001fc2                AES_init_ctx
+                0x00001fca                AES_init_ctx_iv
+                0x00001fe2                AES_ctx_set_iv
+                0x00001fee                AES_ECB_encrypt
+                0x00001ffc                AES_ECB_decrypt
+                0x0000200a                AES_CBC_encrypt_buffer
+                0x00002042                AES_CBC_decrypt_buffer
+                0x00002088                AES_CTR_xcrypt_buffer
+ .text          0x000020fc      0x580 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x000025e0                ecdh_generate_keys
+                0x00002634                ecdh_shared_secret
+ .text          0x0000267c       0x5c objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+                0x0000267c                atoi
+                0x0000269a                atoh
+ .text          0x000026d8       0xac objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+                0x000026d8                memlog_init
+                0x00002718                memlog_getc
+                0x00002758                memlog_putc
+ .text          0x00002784       0x60 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+                0x00002784                strlen
+                0x00002794                strcmp
+                0x000027aa                strcpy
+                0x000027be                memcpy
+                0x000027d4                memset
+ .text          0x000027e4        0x8 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+                0x000027e4                reset_handler
 
-.glue_7         0x00002260        0x0
- .glue_7        0x00002260        0x0 linker stubs
+.glue_7         0x000027ec        0x0
+ .glue_7        0x000027ec        0x0 linker stubs
 
-.glue_7t        0x00002260        0x0
- .glue_7t       0x00002260        0x0 linker stubs
+.glue_7t        0x000027ec        0x0
+ .glue_7t       0x000027ec        0x0 linker stubs
 
-.vfp11_veneer   0x00002260        0x0
- .vfp11_veneer  0x00002260        0x0 linker stubs
+.vfp11_veneer   0x000027ec        0x0
+ .vfp11_veneer  0x000027ec        0x0 linker stubs
 
-.v4_bx          0x00002260        0x0
- .v4_bx         0x00002260        0x0 linker stubs
+.v4_bx          0x000027ec        0x0
+ .v4_bx         0x000027ec        0x0 linker stubs
 
-.iplt           0x00002260        0x0
- .iplt          0x00002260        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+.iplt           0x000027ec        0x0
+ .iplt          0x000027ec        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 
-.rel.dyn        0x00002260        0x0
- .rel.iplt      0x00002260        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+.rel.dyn        0x000027ec        0x0
+ .rel.iplt      0x000027ec        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 
-.data           0x20000000        0x1 load address 0x00002260
+.data           0x20000000       0x50 load address 0x000027ec
                 0x20000000                        . = ALIGN (0x8)
  *(.data*)
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
@@ -130,135 +139,157 @@ Linker script and memory map
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
  .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- .data          0x20000000        0x1 objects//home/ectf/ectf-trainer/shell/shell/shell.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
- .data          0x20000001        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+ .data          0x20000000        0x0 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .data          0x20000000       0x50 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x20000004                AES_key_b64
+                0x20000030                ECDH_privkey_b64
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .data          0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
 
-.igot.plt       0x20000004        0x0 load address 0x00002261
- .igot.plt      0x20000004        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+.igot.plt       0x20000050        0x0 load address 0x0000283c
+ .igot.plt      0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 
-.rodata         0x00002264      0xad8
-                0x00002268                        . = ALIGN (0x8)
- *fill*         0x00002264        0x4 
-                0x00002268                        __CMD_TABLE_START__ = .
+.rodata         0x0000283c      0xdf4
+                0x00002840                        . = ALIGN (0x8)
+ *fill*         0x0000283c        0x4 
+                0x00002840                        __CMD_TABLE_START__ = .
  *(.cmd_list*)
- .cmd_list      0x00002268        0xc objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
-                0x00002268                _varcar_mesg
- .cmd_list      0x00002274        0xc objects//home/ectf/ectf-trainer/ectf/fob/pair.o
-                0x00002274                _varpair
- .cmd_list      0x00002280        0xc objects//home/ectf/ectf-trainer/ectf/fob/aes.o
-                0x00002280                _varaes
- .cmd_list      0x0000228c       0x18 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
-                0x0000228c                _vardecode64
-                0x00002298                _varencode64
- .cmd_list      0x000022a4        0xc objects//home/ectf/ectf-trainer/ectf/fob/ping.o
-                0x000022a4                _varsend_ping
- .cmd_list      0x000022b0       0x24 objects//home/ectf/ectf-trainer/shell/shell/shell.o
-                0x000022b0                _varcmd_exec_status
-                0x000022bc                _varhelp
-                0x000022c8                _varshow_history
- .cmd_list      0x000022d4       0x3c objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
-                0x000022d4                _varread_mem
-                0x000022e0                _varw32
-                0x000022ec                _varr32
-                0x000022f8                _varr32_bit
-                0x00002304                _varw32_bit
-                0x00002310                        __AUTO_TABLE_START__ = .
+ .cmd_list      0x00002840        0xc objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                0x00002840                _varcar_mesg
+ .cmd_list      0x0000284c        0xc objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+                0x0000284c                _varaes_test
+ .cmd_list      0x00002858        0xc objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x00002858                _varpair
+ .cmd_list      0x00002864       0x18 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                0x00002864                _vardecode64
+                0x00002870                _varencode64
+ .cmd_list      0x0000287c        0xc objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+                0x0000287c                _varecdh_test
+ .cmd_list      0x00002888        0xc objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x00002888                _varsend_ping
+ .cmd_list      0x00002894        0xc objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+                0x00002894                _varsha256_test
+ .cmd_list      0x000028a0       0x24 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x000028a0                _varcmd_exec_status
+                0x000028ac                _varhelp
+                0x000028b8                _varshow_history
+ .cmd_list      0x000028c4       0x3c objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x000028c4                _varread_mem
+                0x000028d0                _varw32
+                0x000028dc                _varr32
+                0x000028e8                _varr32_bit
+                0x000028f4                _varw32_bit
+                0x00002900                        __AUTO_TABLE_START__ = .
  *(.auto_list*)
- .auto_list     0x00002310        0xc objects//home/ectf/ectf-trainer/shell/shell/shell.o
-                0x00002310                _varbuild_info
+ .auto_list     0x00002900        0xc objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x00002900                _varbuild_info
  *(.cmd_end*)
- .cmd_end       0x0000231c        0xc objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .cmd_end       0x0000290c        0xc objects//home/ectf/ectf-trainer/shell/shell/shell.o
  *(.rodata*)
  .rodata.str1.4
-                0x00002328       0x89 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
-                                 0x8d (size before relaxing)
- *fill*         0x000023b1        0x3 
+                0x00002918      0x120 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                                0x124 (size before relaxing)
  .rodata.str1.4
-                0x000023b4       0x5b objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- *fill*         0x0000240f        0x1 
+                0x00002a38       0xf4 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
  .rodata.str1.4
-                0x00002410       0xaf objects//home/ectf/ectf-trainer/ectf/fob/aes.o
- *fill*         0x000024bf        0x1 
- .rodata        0x000024c0       0x10 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                0x00002b2c       0x5b objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ *fill*         0x00002b87        0x1 
  .rodata.str1.4
-                0x000024d0      0x18a objects//home/ectf/ectf-trainer/ectf/fob/base64.o
- *fill*         0x0000265a        0x2 
+                0x00002b88      0x124 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
  .rodata.str1.4
-                0x0000265c       0x42 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- *fill*         0x0000269e        0x2 
- .rodata        0x000026a0      0x16d objects//home/ectf/ectf-trainer/shell/shell/shell.o
- *fill*         0x0000280d        0x3 
+                0x00002cac       0xcd objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+ *fill*         0x00002d79        0x3 
  .rodata.str1.4
-                0x00002810        0xf objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- *fill*         0x0000281f        0x1 
- .rodata        0x00002820       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                0x00002d7c       0x42 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ *fill*         0x00002dbe        0x2 
  .rodata.str1.4
-                0x00002830       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .rodata        0x00002840       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                0x00002dc0       0xd4 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .rodata        0x00002e94      0x16d objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ *fill*         0x00003001        0x3 
+ .rodata        0x00003004      0x100 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
  .rodata.str1.4
-                0x00002850      0x267 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- *fill*         0x00002ab7        0x1 
- .rodata        0x00002ab8      0x20c objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .rodata        0x00002cc4       0x78 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
-                0x00002cc4                polynomial
-                0x00002cdc                coeff_b
-                0x00002cf4                base_y
-                0x00002d0c                base_x
-                0x00002d24                base_order
+                0x00003104        0xf objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ *fill*         0x00003113        0x1 
+ .rodata        0x00003114       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .rodata.str1.4
+                0x00003124       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .rodata        0x00003134       0x10 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .rodata.str1.4
+                0x00003144      0x267 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ *fill*         0x000033ab        0x1 
+ .rodata        0x000033ac      0x20c objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .rodata        0x000035b8       0x78 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x000035b8                polynomial
+                0x000035d0                coeff_b
+                0x000035e8                base_y
+                0x00003600                base_x
+                0x00003618                base_order
 
-.bss            0x20000004      0x13c
-                0x20000008                        . = ALIGN (0x8)
- *fill*         0x20000004        0x4 
+.bss            0x20000050      0x2f0
+                0x20000050                        . = ALIGN (0x8)
  *(.bss*)
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
- .bss           0x20000008        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- .bss           0x20000008      0x11c objects//home/ectf/ectf-trainer/shell/shell/shell.o
-                0x20000008                __write_char__
-                0x20000118                __read_char__
-                0x2000011c                __read_char2__
-                0x20000120                __write_char2__
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
- .bss           0x20000124        0x0 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
- .bss           0x20000124       0x1c objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
- .bss           0x20000140        0x0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
- .bss           0x20000140        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .bss           0x20000050        0x0 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .bss           0x20000050      0x2d4 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x20000050                __write_char__
+                0x20000160                __read_char__
+                0x20000164                __read_char2__
+                0x20000168                __write_char2__
+                0x2000016c                AES_key
+                0x2000018c                ctx
+                0x2000028c                ECDH_AESkey
+                0x200002ac                ECDH_shared
+                0x200002dc                ECDH_pubkey
+                0x2000030c                ECDH_privkey
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .bss           0x20000324        0x0 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .bss           0x20000324       0x1c objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .bss           0x20000340        0x0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .bss           0x20000340        0x0 objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
                 0x20007ffc                        PROVIDE (_STACK_TOP_ = ((ORIGIN (RAM) + LENGTH (RAM)) - 0x4))
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/pair.o
-LOAD objects//home/ectf/ectf-trainer/ectf/fob/aes.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
 LOAD objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+LOAD objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
 LOAD objects//home/ectf/ectf-trainer/shell/shell/shell.o
 LOAD objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+LOAD objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
 LOAD objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
 LOAD objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
 LOAD objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
@@ -275,86 +306,98 @@ LOAD objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
 OUTPUT(shell.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x5190
- .debug_info    0x00000000      0x205 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
- .debug_info    0x00000205       0xc1 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
- .debug_info    0x000002c6       0x95 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
- .debug_info    0x0000035b       0x95 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
- .debug_info    0x000003f0      0x183 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
- .debug_info    0x00000573      0x18f objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .debug_info    0x00000702      0x399 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
- .debug_info    0x00000a9b      0x3b5 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
- .debug_info    0x00000e50      0x18f objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- .debug_info    0x00000fdf      0xee3 objects//home/ectf/ectf-trainer/shell/shell/shell.o
- .debug_info    0x00001ec2      0x309 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
- .debug_info    0x000021cb      0x32f objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- .debug_info    0x000024fa      0x32f objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .debug_info    0x00002829      0x56c objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- .debug_info    0x00002d95      0xc33 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .debug_info    0x000039c8     0x1245 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
- .debug_info    0x00004c0d      0x14b objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
- .debug_info    0x00004d58      0x22a objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
- .debug_info    0x00004f82      0x20e objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+.debug_info     0x00000000     0x6369
+ .debug_info    0x00000000      0x45e objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_info    0x0000045e       0xc1 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_info    0x0000051f       0x95 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_info    0x000005b4       0x95 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_info    0x00000649      0x183 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_info    0x000007cc      0x3a9 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+ .debug_info    0x00000b75      0x18f objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_info    0x00000d04      0x366 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_info    0x0000106a      0x649 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+ .debug_info    0x000016b3      0x18f objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_info    0x00001842      0x40a objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .debug_info    0x00001c4c     0x1095 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_info    0x00002ce1      0x309 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_info    0x00002fea      0x3b9 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+ .debug_info    0x000033a3      0x32f objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_info    0x000036d2      0x32f objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_info    0x00003a01      0x56c objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_info    0x00003f6d      0xc34 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_info    0x00004ba1     0x1245 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_info    0x00005de6      0x14b objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_info    0x00005f31      0x22a objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_info    0x0000615b      0x20e objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_abbrev   0x00000000     0x1a62
- .debug_abbrev  0x00000000      0x11e objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
- .debug_abbrev  0x0000011e       0x9d objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
- .debug_abbrev  0x000001bb       0x9f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
- .debug_abbrev  0x0000025a       0x9f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
- .debug_abbrev  0x000002f9       0xca objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
- .debug_abbrev  0x000003c3      0x10b objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .debug_abbrev  0x000004ce      0x194 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
- .debug_abbrev  0x00000662      0x163 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
- .debug_abbrev  0x000007c5      0x10b objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- .debug_abbrev  0x000008d0      0x3e2 objects//home/ectf/ectf-trainer/shell/shell/shell.o
- .debug_abbrev  0x00000cb2       0xdf objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
- .debug_abbrev  0x00000d91      0x1cf objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- .debug_abbrev  0x00000f60      0x1cf objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .debug_abbrev  0x0000112f      0x192 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- .debug_abbrev  0x000012c1      0x261 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .debug_abbrev  0x00001522      0x220 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
- .debug_abbrev  0x00001742       0xc6 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
- .debug_abbrev  0x00001808      0x152 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
- .debug_abbrev  0x0000195a      0x108 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+.debug_abbrev   0x00000000     0x1f95
+ .debug_abbrev  0x00000000      0x1a0 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_abbrev  0x000001a0       0x9d objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_abbrev  0x0000023d       0x9f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_abbrev  0x000002dc       0x9f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_abbrev  0x0000037b       0xca objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_abbrev  0x00000445      0x196 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+ .debug_abbrev  0x000005db      0x10b objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_abbrev  0x000006e6      0x163 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_abbrev  0x00000849      0x1af objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+ .debug_abbrev  0x000009f8      0x10b objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_abbrev  0x00000b03      0x172 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .debug_abbrev  0x00000c75      0x42b objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_abbrev  0x000010a0       0xdf objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_abbrev  0x0000117f      0x145 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+ .debug_abbrev  0x000012c4      0x1cf objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_abbrev  0x00001493      0x1cf objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_abbrev  0x00001662      0x192 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_abbrev  0x000017f4      0x261 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_abbrev  0x00001a55      0x220 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_abbrev  0x00001c75       0xc6 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_abbrev  0x00001d3b      0x152 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_abbrev  0x00001e8d      0x108 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
 .debug_loclists
-                0x00000000     0x1fdb
+                0x00000000     0x2342
  .debug_loclists
-                0x00000000       0x3a objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+                0x00000000       0x79 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
  .debug_loclists
-                0x0000003a       0x2f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+                0x00000079       0x2f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
  .debug_loclists
-                0x00000069       0x2f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+                0x000000a8       0x2f objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
  .debug_loclists
-                0x00000098       0x30 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x000000d7       0x59 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
  .debug_loclists
-                0x000000c8       0x44 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                0x00000130       0x30 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
  .debug_loclists
-                0x0000010c      0x10c objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                0x00000160       0xe9 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
  .debug_loclists
-                0x00000218       0x30 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x00000249       0x66 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
  .debug_loclists
-                0x00000248      0x53c objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x000002af       0x30 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
  .debug_loclists
-                0x00000784      0x19d objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+                0x000002df       0x41 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
  .debug_loclists
-                0x00000921      0x390 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                0x00000320      0x53c objects//home/ectf/ectf-trainer/shell/shell/shell.o
  .debug_loclists
-                0x00000cb1      0x390 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                0x0000085c      0x19d objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
  .debug_loclists
-                0x00001041      0x282 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x000009f9      0x291 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
  .debug_loclists
-                0x000012c3      0x618 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+                0x00000c8a      0x390 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
  .debug_loclists
-                0x000018db      0x507 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x0000101a      0x390 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
  .debug_loclists
-                0x00001de2       0xa1 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+                0x000013aa      0x282 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
  .debug_loclists
-                0x00001e83       0x78 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+                0x0000162c      0x616 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
  .debug_loclists
-                0x00001efb       0xe0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+                0x00001c42      0x507 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_loclists
+                0x00002149       0xa1 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_loclists
+                0x000021ea       0x78 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_loclists
+                0x00002262       0xe0 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_aranges  0x00000000      0x260
+.debug_aranges  0x00000000      0x2c0
  .debug_aranges
                 0x00000000       0x20 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
  .debug_aranges
@@ -366,93 +409,108 @@ LOAD linker stubs
  .debug_aranges
                 0x00000080       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
  .debug_aranges
-                0x000000a0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x000000a0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
  .debug_aranges
-                0x000000c0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                0x000000c0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
  .debug_aranges
                 0x000000e0       0x20 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
  .debug_aranges
-                0x00000100       0x20 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x00000100       0x20 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
  .debug_aranges
-                0x00000120       0x20 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x00000120       0x20 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
  .debug_aranges
-                0x00000140       0x20 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+                0x00000140       0x20 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
  .debug_aranges
-                0x00000160       0x20 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                0x00000160       0x20 objects//home/ectf/ectf-trainer/shell/shell/shell.o
  .debug_aranges
-                0x00000180       0x20 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                0x00000180       0x20 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
  .debug_aranges
-                0x000001a0       0x20 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x000001a0       0x20 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
  .debug_aranges
-                0x000001c0       0x20 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+                0x000001c0       0x20 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
  .debug_aranges
-                0x000001e0       0x20 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x000001e0       0x20 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
  .debug_aranges
-                0x00000200       0x20 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+                0x00000200       0x20 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
  .debug_aranges
-                0x00000220       0x20 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+                0x00000220       0x20 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
  .debug_aranges
-                0x00000240       0x20 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+                0x00000240       0x20 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_aranges
+                0x00000260       0x20 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_aranges
+                0x00000280       0x20 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_aranges
+                0x000002a0       0x20 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_line     0x00000000     0x3970
- .debug_line    0x00000000      0x13c objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
- .debug_line    0x0000013c       0xc4 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
- .debug_line    0x00000200       0xfd objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
- .debug_line    0x000002fd       0xfe objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
- .debug_line    0x000003fb      0x12c objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
- .debug_line    0x00000527       0xca objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .debug_line    0x000005f1      0x1a7 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
- .debug_line    0x00000798      0x20c objects//home/ectf/ectf-trainer/ectf/fob/base64.o
- .debug_line    0x000009a4       0xca objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- .debug_line    0x00000a6e      0x96a objects//home/ectf/ectf-trainer/shell/shell/shell.o
- .debug_line    0x000013d8      0x466 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
- .debug_line    0x0000183e      0x3a3 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- .debug_line    0x00001be1      0x3a4 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .debug_line    0x00001f85      0x323 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- .debug_line    0x000022a8      0xadb objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .debug_line    0x00002d83      0x6a2 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
- .debug_line    0x00003425      0x189 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
- .debug_line    0x000035ae      0x20f objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
- .debug_line    0x000037bd      0x1b3 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+.debug_line     0x00000000     0x4599
+ .debug_line    0x00000000      0x265 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_line    0x00000265       0xc4 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_line    0x00000329       0xfd objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_line    0x00000426       0xfe objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_line    0x00000524      0x12c objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_line    0x00000650      0x1b9 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+ .debug_line    0x00000809       0xca objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_line    0x000008d3      0x214 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_line    0x00000ae7      0x243 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+ .debug_line    0x00000d2a       0xca objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_line    0x00000df4      0x20a objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .debug_line    0x00000ffe      0x9d5 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_line    0x000019d3      0x466 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_line    0x00001e39      0x5f8 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+ .debug_line    0x00002431      0x3a3 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_line    0x000027d4      0x3a4 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_line    0x00002b78      0x323 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_line    0x00002e9b      0xb11 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_line    0x000039ac      0x6a2 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_line    0x0000404e      0x189 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_line    0x000041d7      0x20f objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_line    0x000043e6      0x1b3 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
-.debug_str      0x00000000      0xe06
- .debug_str     0x00000000      0x16d objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
-                                0x1af (size before relaxing)
- .debug_str     0x0000016d       0x79 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
-                                0x199 (size before relaxing)
- .debug_str     0x000001e6       0x4c objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
-                                 0xed (size before relaxing)
- .debug_str     0x00000232       0x50 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
-                                 0xf1 (size before relaxing)
- .debug_str     0x00000282       0x89 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
-                                0x1e9 (size before relaxing)
- .debug_str     0x0000030b       0x39 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
-                                0x1a8 (size before relaxing)
- .debug_str     0x00000344       0x82 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
-                                0x202 (size before relaxing)
- .debug_str     0x000003c6       0x72 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+.debug_str      0x00000000      0xfcc
+ .debug_str     0x00000000      0x1b1 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
                                 0x1fc (size before relaxing)
- .debug_str     0x00000438       0x36 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_str     0x000001b1       0x79 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+                                0x199 (size before relaxing)
+ .debug_str     0x0000022a       0x4c objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+                                 0xed (size before relaxing)
+ .debug_str     0x00000276       0x50 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+                                 0xf1 (size before relaxing)
+ .debug_str     0x000002c6       0x89 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+                                0x1e9 (size before relaxing)
+ .debug_str     0x0000034f       0x67 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+                                0x21e (size before relaxing)
+ .debug_str     0x000003b6       0x31 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                                0x1a8 (size before relaxing)
+ .debug_str     0x000003e7       0x56 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+                                0x204 (size before relaxing)
+ .debug_str     0x0000043d      0x134 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+                                0x2f8 (size before relaxing)
+ .debug_str     0x00000571       0x36 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
                                 0x1b2 (size before relaxing)
- .debug_str     0x0000046e      0x2b5 objects//home/ectf/ectf-trainer/shell/shell/shell.o
-                                0x4da (size before relaxing)
- .debug_str     0x00000723       0xb6 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_str     0x000005a7       0x57 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+                                0x254 (size before relaxing)
+ .debug_str     0x000005fe      0x2c9 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                                0x564 (size before relaxing)
+ .debug_str     0x000008c7       0xb6 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
                                 0x189 (size before relaxing)
- .debug_str     0x000007d9       0xcd objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_str     0x0000097d       0x48 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+                                0x1dd (size before relaxing)
+ .debug_str     0x000009c5       0xcd objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
                                 0x1b3 (size before relaxing)
- .debug_str     0x000008a6       0x63 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_str     0x00000a92       0x63 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
                                 0x1ba (size before relaxing)
- .debug_str     0x00000909       0x8f objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_str     0x00000af5       0x8f objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
                                 0x22c (size before relaxing)
- .debug_str     0x00000998      0x124 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_str     0x00000b84      0x124 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
                                 0x2e2 (size before relaxing)
- .debug_str     0x00000abc      0x219 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_str     0x00000ca8      0x1f3 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
                                 0x351 (size before relaxing)
- .debug_str     0x00000cd5       0x2c objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_str     0x00000e9b       0x2c objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
                                 0x16a (size before relaxing)
- .debug_str     0x00000d01       0xaf objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_str     0x00000ec7       0xaf objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
                                 0x20e (size before relaxing)
- .debug_str     0x00000db0       0x56 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .debug_str     0x00000f76       0x56 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
                                 0x14b (size before relaxing)
 
 .comment        0x00000000       0x55
@@ -462,12 +520,15 @@ LOAD linker stubs
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/shell/shell.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
  .comment       0x00000055       0x56 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
@@ -490,56 +551,65 @@ LOAD linker stubs
  .ARM.attributes
                 0x000000b8       0x2e objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
  .ARM.attributes
-                0x000000e6       0x2e objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+                0x000000e6       0x2e objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
  .ARM.attributes
-                0x00000114       0x2e objects//home/ectf/ectf-trainer/ectf/fob/aes.o
+                0x00000114       0x2e objects//home/ectf/ectf-trainer/ectf/fob/pair.o
  .ARM.attributes
                 0x00000142       0x2e objects//home/ectf/ectf-trainer/ectf/fob/base64.o
  .ARM.attributes
-                0x00000170       0x2e objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+                0x00000170       0x2e objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
  .ARM.attributes
-                0x0000019e       0x2e objects//home/ectf/ectf-trainer/shell/shell/shell.o
+                0x0000019e       0x2e objects//home/ectf/ectf-trainer/ectf/fob/ping.o
  .ARM.attributes
-                0x000001cc       0x2e objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+                0x000001cc       0x2e objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
  .ARM.attributes
-                0x000001fa       0x2e objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+                0x000001fa       0x2e objects//home/ectf/ectf-trainer/shell/shell/shell.o
  .ARM.attributes
-                0x00000228       0x2e objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+                0x00000228       0x2e objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
  .ARM.attributes
-                0x00000256       0x2e objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+                0x00000256       0x2e objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
  .ARM.attributes
-                0x00000284       0x2e objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+                0x00000284       0x2e objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
  .ARM.attributes
-                0x000002b2       0x2e objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+                0x000002b2       0x2e objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
  .ARM.attributes
-                0x000002e0       0x2e objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+                0x000002e0       0x2e objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
  .ARM.attributes
-                0x0000030e       0x2e objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+                0x0000030e       0x2e objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
  .ARM.attributes
-                0x0000033c       0x2e objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+                0x0000033c       0x2e objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
  .ARM.attributes
-                0x0000036a       0x1c objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
+                0x0000036a       0x2e objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .ARM.attributes
+                0x00000398       0x2e objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .ARM.attributes
+                0x000003c6       0x2e objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+ .ARM.attributes
+                0x000003f4       0x1c objects//home/ectf/ectf-trainer/ectf/fob/platform/start.o
 
-.debug_frame    0x00000000      0xc7c
- .debug_frame   0x00000000       0x2c objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
- .debug_frame   0x0000002c       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
- .debug_frame   0x0000004c       0x48 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
- .debug_frame   0x00000094       0x48 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
- .debug_frame   0x000000dc       0x38 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
- .debug_frame   0x00000114       0x28 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
- .debug_frame   0x0000013c       0x30 objects//home/ectf/ectf-trainer/ectf/fob/aes.o
- .debug_frame   0x0000016c       0x50 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
- .debug_frame   0x000001bc       0x28 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
- .debug_frame   0x000001e4      0x2c8 objects//home/ectf/ectf-trainer/shell/shell/shell.o
- .debug_frame   0x000004ac       0x9c objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
- .debug_frame   0x00000548       0x88 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
- .debug_frame   0x000005d0       0x88 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
- .debug_frame   0x00000658       0x98 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
- .debug_frame   0x000006f0      0x238 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
- .debug_frame   0x00000928      0x270 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
- .debug_frame   0x00000b98       0x30 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
- .debug_frame   0x00000bc8       0x54 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
- .debug_frame   0x00000c1c       0x60 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
+.debug_frame    0x00000000      0xd7c
+ .debug_frame   0x00000000       0x34 objects//home/ectf/ectf-trainer/ectf/fob/mesg.o
+ .debug_frame   0x00000034       0x20 objects//home/ectf/ectf-trainer/ectf/fob/platform/vector_table.o
+ .debug_frame   0x00000054       0x48 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart.o
+ .debug_frame   0x0000009c       0x48 objects//home/ectf/ectf-trainer/ectf/fob/platform/uart/uart2.o
+ .debug_frame   0x000000e4       0x38 objects//home/ectf/ectf-trainer/ectf/fob/platform/platform.o
+ .debug_frame   0x0000011c       0x34 objects//home/ectf/ectf-trainer/ectf/fob/aes_test.o
+ .debug_frame   0x00000150       0x28 objects//home/ectf/ectf-trainer/ectf/fob/pair.o
+ .debug_frame   0x00000178       0x50 objects//home/ectf/ectf-trainer/ectf/fob/base64.o
+ .debug_frame   0x000001c8       0x34 objects//home/ectf/ectf-trainer/ectf/fob/ecdh_test.o
+ .debug_frame   0x000001fc       0x28 objects//home/ectf/ectf-trainer/ectf/fob/ping.o
+ .debug_frame   0x00000224       0x34 objects//home/ectf/ectf-trainer/ectf/fob/sha256_test.o
+ .debug_frame   0x00000258      0x2c8 objects//home/ectf/ectf-trainer/shell/shell/shell.o
+ .debug_frame   0x00000520       0x9c objects//home/ectf/ectf-trainer/shell/lib/base64/base64.o
+ .debug_frame   0x000005bc       0x8c objects//home/ectf/ectf-trainer/shell/lib/sha256/sha256.o
+ .debug_frame   0x00000648       0x88 objects//home/ectf/ectf-trainer/shell/lib/printf/printf.o
+ .debug_frame   0x000006d0       0x88 objects//home/ectf/ectf-trainer/shell/lib/printf/printf2.o
+ .debug_frame   0x00000758       0x98 objects//home/ectf/ectf-trainer/shell/lib/utils/utils.o
+ .debug_frame   0x000007f0      0x238 objects//home/ectf/ectf-trainer/shell/lib/tiny-aes/aes.o
+ .debug_frame   0x00000a28      0x270 objects//home/ectf/ectf-trainer/shell/lib/tiny-ecdh/ecdh.o
+ .debug_frame   0x00000c98       0x30 objects//home/ectf/ectf-trainer/shell/lib/a2i/a2i.o
+ .debug_frame   0x00000cc8       0x54 objects//home/ectf/ectf-trainer/shell/lib/memlog/memlog.o
+ .debug_frame   0x00000d1c       0x60 objects//home/ectf/ectf-trainer/shell/lib/string/string.o
 
 .debug_rnglists
                 0x00000000       0xec

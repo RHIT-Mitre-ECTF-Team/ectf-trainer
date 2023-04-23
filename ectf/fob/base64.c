@@ -1,25 +1,26 @@
 #include "shell.h"
-#define MAX64LENGTH 100
+
+// Base64 encoded strings are longer than byte arrays. 
+// Your max length should be 4*ceil(n/3) where n is the length of
+// the array to be encoded. e.g. 100 bytes are encoded in 128 characters
+#define MAXARRAYLEN 100 
+#define MAXBASE64LEN 128
 
 int encode64(int argc, char** argv) {
 
-    
-
     if (argc > 1) {
 
-        unsigned char encoded[MAX64LENGTH];
+        uint8_t encoded[MAXBASE64LEN];
         int len;
 
         len = strlen(argv[1]);
-
-        if (len < MAX64LENGTH) {
-            len = encode_base64(argv[1], len, encoded);
+        if (len < MAXARRAYLEN) {
+            len = encode_base64((uint8_t *) argv[1], len, encoded);
             printf("Encoded %s as %s with %d characters\n", argv[1], encoded, len);
         }
         else {
-            printf("String exceeds max length of %d characters", MAX64LENGTH);
+            printf("String exceeds max length of %d characters", MAXARRAYLEN);
         }
-
     }
     else {
         printf("Usage is 'encode64 string'\n");
@@ -34,23 +35,16 @@ int decode64(int argc, char** argv) {
 
         int len = strlen(argv[1]);
 
-        if (len < MAX64LENGTH-1) {
+        if (len < MAXBASE64LEN) {
                 
-                char plaintext[MAX64LENGTH];
-
-                printf("encoded string is %d characters\n", len);
-                len = decode_base64(argv[1], len, plaintext);
-                printf("decoded string is %d characters\n", len);
-                printf("Adding NULL at the end of decoded string\n");
-                plaintext[len] = '\n';
-
+                uint8_t plaintext[MAXARRAYLEN + 1];
+                len = decode_base64((uint8_t *) argv[1], len, plaintext);
+                plaintext[len] = '\0';
                 printf("Decoded %s as: %s\n", argv[1], plaintext);
-
         }
         else {
-            printf("String exceeds max length of %d characters", MAX64LENGTH);
-        }
-    
+            printf("String exceeds max base64 string length of %d characters", MAXBASE64LEN);
+        }   
     }
     else {
         printf("Usage is 'decode64 string'\n");
@@ -60,5 +54,5 @@ int decode64(int argc, char** argv) {
 }
 
 // ADD_CMD(command, description, function name);
-ADD_CMD(encode64, "Base64 encodes a string and sends it on UART2", encode64);
-ADD_CMD(decode64, "Base64 decodes a string and sends it on UART2", decode64);
+ADD_CMD(encode64, "Base64 encodes a string", encode64);
+ADD_CMD(decode64, "Base64 decodes a string", decode64);

@@ -96,12 +96,6 @@ int ecdh_generate_keys(uint8_t* public_key, uint8_t* private_key);
 /* input: own private key + other party's public key, output: shared secret */
 int ecdh_shared_secret(const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output);
 
-
-/* Broken :( .... */
-int ecdsa_sign(const uint8_t* private_key, uint8_t* hash, uint8_t* random_k, uint8_t* signature);
-int ecdsa_verify(const uint8_t* public_key, uint8_t* hash, const uint8_t* signature);
-
-
 /******************************************************************************/
 
 #ifdef __cplusplus

@@ -21,6 +21,18 @@
 #include "shell_config.h"
 #include "string.h"
 
+// AES control struct and default key set here
+struct AES_ctx ctx;
+uint8_t AES_key_b64[44] = "3q2+796tvu/erb7v3q2+796tvu/erb7v3q2+796tvu8=";
+uint8_t AES_key[AES_KEYLEN];
+
+uint8_t ECDH_privkey_b64[32] = "DeyvDeyvDeyvDeyvDeyvDeyvDeyvDeyv";
+uint8_t ECDH_privkey[ECC_PRV_KEY_SIZE];
+uint8_t ECDH_pubkey[ECC_PUB_KEY_SIZE];
+uint8_t ECDH_shared[ECC_PUB_KEY_SIZE];
+uint8_t ECDH_AESkey[AES_KEYLEN];
+
+// Pointers to the read and write functions for the different UARTs
 int (*__read_char__)(void);
 int (*__read_char2__)(void);
 void (*__write_char__)(char c);
@@ -420,6 +432,9 @@ void prompt() {
   initial_setup();
   exec_auto_cmds();
   setup();
+  decode_base64(AES_key_b64, 44, AES_key);
+  AES_init_ctx(&ctx, AES_key);
+
 
   while (TRUE) {
     shell();
