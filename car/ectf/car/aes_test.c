@@ -1,8 +1,8 @@
 #include "shell.h"
 
 // AES variables set globally in shell.c
-extern struct AES_ctx ctx;
-extern uint8_t AES_key[];
+//extern struct AES_ctx ctx;
+//extern uint8_t AES_key[];
 
 int aes_test(int argc, char** argv) {
     

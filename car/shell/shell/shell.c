@@ -21,12 +21,15 @@
 #include "shell_config.h"
 #include "string.h"
 
+int pairing_PIN = 123456;
+int car_ID = 4321;
+
 // AES control struct and default key set here
 struct AES_ctx ctx;
 uint8_t AES_key_b64[44] = "3q2+796tvu/erb7v3q2+796tvu/erb7v3q2+796tvu8=";
 uint8_t AES_key[AES_KEYLEN];
 
-uint8_t ECDH_privkey_b64[32] = "DeyvDeyvDeyvDeyvDeyvDeyvDeyvDeyv";
+uint8_t ECDH_privkey_b64[32] = "wP/uwP/uwP/uwP/uwP/uwP/uwP/uwP/u";
 uint8_t ECDH_privkey[ECC_PRV_KEY_SIZE];
 uint8_t ECDH_pubkey[ECC_PUB_KEY_SIZE];
 uint8_t ECDH_shared[ECC_PUB_KEY_SIZE];
@@ -434,7 +437,6 @@ void prompt() {
   setup();
   decode_base64(AES_key_b64, 44, AES_key);
   AES_init_ctx(&ctx, AES_key);
-
 
   while (TRUE) {
     shell();

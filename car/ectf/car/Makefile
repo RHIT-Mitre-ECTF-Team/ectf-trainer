@@ -44,11 +44,18 @@ SHELL_ROOT=../../shell
 # ------------------------ User targets below this line ------------------------
 ### run: Launches QEMU and loads the project binary on it
 run: $(PROJECT).elf
-	@echo "Connect to the fob using: nc localhost 1234"
-	@echo "Monitor car-fob communication using: nc localhost 1235"
+	@echo "Connect to the car using: nc localhost 1236"
+	@echo "Monitor car-fob communication using: nc localhost 1237"
 	@qemu-system-arm -M lm3s6965evb -cpu cortex-m3 -nographic \
-		-kernel $(PROJECT).elf -serial tcp::1234,server,nowait \
-		-serial tcp::1235,server,nowait
+		-kernel $(PROJECT).elf -serial tcp::1236,server,nowait \
+		-serial tcp::1237,server,nowait
+
+connected: $(PROJECT).elf
+	@echo "Connect to the car using: nc localhost 1236"
+	@echo "The car is listening on 1237"
+	@qemu-system-arm -M lm3s6965evb -cpu cortex-m3 -nographic \
+		-kernel $(PROJECT).elf -serial tcp::1236,server,nowait \
+		-serial udp::4555@:4556
 
 ### debug: Qemu with GDB server. To be executed before 'make gdb'
 debug:

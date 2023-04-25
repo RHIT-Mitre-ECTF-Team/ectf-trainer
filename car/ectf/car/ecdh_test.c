@@ -1,17 +1,17 @@
 #include "shell.h"
 
-extern uint8_t ECDH_privkey_b64[];
-extern uint8_t ECDH_privkey[];
-extern uint8_t ECDH_pubkey[];
-extern uint8_t ECDH_shared[];
-extern uint8_t ECDH_AESkey[];
-extern uint8_t AES_key[];
-extern struct AES_ctx ctx;
+//extern uint8_t ECDH_privkey_b64[];
+//extern uint8_t ECDH_privkey[];
+//extern uint8_t ECDH_pubkey[];
+//extern uint8_t ECDH_shared[];
+//extern uint8_t ECDH_AESkey[];
+//extern uint8_t AES_key[];
+//extern struct AES_ctx ctx;
 
 
 int ecdh_test(int argc, char** argv) {
 
-    uint8_t b64privkey2[32] = "wP/uwP/uwP/uwP/uwP/uwP/uwP/uwP/u";
+    uint8_t b64privkey2[32] = "DeyvDeyvDeyvDeyvDeyvDeyvDeyvDeyv";
     uint8_t privkey2[ECC_PRV_KEY_SIZE];
     uint8_t pubkey2[ECC_PUB_KEY_SIZE];
     uint8_t sharedsecret2[ECC_PRV_KEY_SIZE];

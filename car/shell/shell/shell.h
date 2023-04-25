@@ -32,6 +32,18 @@ extern "C" {
 #include "ecdh.h"
 #include "sha256.h"
 
+extern int pairing_PIN;
+extern int car_ID;
+extern struct AES_ctx ctx;
+extern uint8_t AES_key_b64[];
+extern uint8_t AES_key[];
+extern uint8_t ECDH_privkey_b64[];
+extern uint8_t ECDH_privkey[];
+extern uint8_t ECDH_pubkey[];
+extern uint8_t ECDH_pubkey_b64[];
+extern uint8_t ECDH_shared[];
+extern uint8_t ECDH_AESkey[];
+
 
 /**
  * @brief Looks for and executes a string as a command
